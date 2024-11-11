@@ -1,0 +1,124 @@
+.title-bar {
+  padding-top: 8px;
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 1px;
+  z-index: 200;
+  position: sticky;
+}
+
+.title-bar h1 {
+  flex: 2;
+  margin-left: 10px;
+  font-size: 30px;
+  color: #0797da;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.titlebar-icon {
+  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.search,
+.icon {
+  font-size: 25px;
+  margin: 0px 10px;
+  margin-left: 15px;
+  color: rgb(34, 34, 34);
+}
+.menu-icon {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+
+.card-menu-wrap {
+  position: absolute;
+  right: 0px;
+  top: 45px;
+  z-index: 3;
+  max-height: 0px;
+  overflow: hidden;
+}
+.open-menu {
+  max-height: 400px;
+}
+.card-menu {
+  width: 260px;
+  background-color: #fff;
+  border-radius: 10px;
+  /* box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.3); */
+  border-radius: 5px;
+  padding: 10px;
+  border: 2px solid rgba(137, 153, 160, 0.2);
+}
+.card-menu > .profile-menu > img {
+  width: 40px;
+  margin-left: 10px;
+  border-radius: 50%;
+  /* object-fit: cover; */
+  margin-right: 10px;
+}
+.card-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  border-radius: 3px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.card-menu-item:hover * {
+  color: #17b6ff;
+}
+.card-menu-item .item {
+  margin-left: 10px;
+  font-size: 30px;
+  margin-right: 10px;
+  color: rgb(66, 66, 66);
+  text-shadow: 2px 2px 2px solid black;
+}
+.card-menu-item p {
+  font-size: 18px;
+  color: rgb(100, 100, 100);
+  margin-left: 6px;
+}
+.card-menu-item:hover,
+.profile-menu:hover {
+  background-color: rgba(131, 235, 185, 0.2);
+}
+.profile-menu {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 8px;
+  color: rgb(80, 80, 80);
+  font-size: 20px;
+  border: 1px solid rgb(158, 157, 157);
+  box-shadow: 2px 4px 10px rgba(137, 153, 160, 0.2);
+    cursor: pointer;
+}
+.gradient-text {
+  font-size: 4rem; /* Adjust font size as needed */
+  font-weight: bold;
+  background: linear-gradient(45deg, rgb(212, 0, 212), rgb(23, 23, 255), rgb(57, 236, 236), rgb(212, 0, 212), rgb(23, 23, 255));
+  background-size: 200% 200%; /* For smoother animation */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-animation 5s ease infinite; /* Animation settings */
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

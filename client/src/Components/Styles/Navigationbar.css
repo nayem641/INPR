@@ -1,0 +1,32 @@
+.navigationMenau-conatiner {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-between;
+  box-shadow: 2px 2px 2px rgba(202, 202, 202, 0.4);
+  background-color: #fff;
+  position: sticky;
+  top: -3px;
+  z-index: 100;
+}
+.navIcon .tab{
+  font-size: 27px;
+}
+
+.navIcon:first-child{
+margin-left: 5px;
+}
+
+/* .link{
+  cursor: pointer;
+  color: black;
+
+  font-size: 25px;
+} */
+.tab:hover{ 
+    color: #16a1fd;
+    font-weight: 800;
+}
+
+ .tab:active{
+      font-weight: 800;
+ }

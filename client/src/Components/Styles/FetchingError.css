@@ -1,0 +1,46 @@
+.error-container {
+    display: flex;
+    flex-direction: column;          /* Stack items vertically */
+    align-items: center;            /* Center items */
+    justify-content: center;        /* Center items */
+    padding: 20px;                 /* Padding for container */
+    border: 1px solid #f44336;     /* Red border */
+    background-color: #ffe3e3;     /* Light red background */
+    border-radius: 8px;            /* Rounded corners */
+    width: 90%;                    /* Width for mobile */
+    max-width: 600px;              /* Max width for larger screens */
+    margin: 20px auto;             /* Center container with margin */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.error-icon {
+    font-size: 50px;               /* Large icon size */
+}
+
+.error-title {
+    font-size: 24px;               /* Title size */
+    color: #f44336;                /* Red color for the title */
+    margin: 10px 0;                /* Margin for spacing */
+}
+
+.error-message {
+    font-size: 16px;               /* Message size */
+    color: #555;                   /* Dark gray color for text */
+    text-align: center;            /* Center align text */
+    margin-bottom: 20px;           /* Margin for spacing */
+}
+
+.retry-button {
+    background-color: #f44336;     /* Button color */
+    color: white;                  /* Button text color */
+    border: none;                  /* No border */
+    border-radius: 4px;           /* Rounded corners */
+    padding: 10px 20px;           /* Padding for button */
+    font-size: 16px;               /* Font size */
+    cursor: pointer;               /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.retry-button:hover {
+    background-color: #d32f2f;     /* Darker red on hover */
+}

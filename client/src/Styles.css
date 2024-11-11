@@ -1,0 +1,15 @@
+.app {
+  background-color: #f0f2f9;
+  width: 100vw;
+}
+.custom-toast{
+    display: "flex";
+    justify-content: center;
+    align-items: center;
+    padding:-5px 10px;
+    margin: 15px auto;
+    border-radius: 15px;
+    width: fit-content;
+    max-width: 80vw;
+    font-family: sans-serif;
+}

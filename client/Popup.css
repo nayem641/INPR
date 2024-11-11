@@ -1,0 +1,58 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  box-sizing: border-box;
+  background: #f0f2f9; /* White background for the popup */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(63, 63, 63, 0.5); /* Enhanced shadow */
+  max-width: 400px;
+  text-align: left; /* Align text to the left */
+}
+
+.popup h2 {
+  color: coral; /* Heading color */
+  margin-bottom: 10px;
+  text-align: center; /* Center align heading */
+}
+
+.error-list {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.error-item {
+  color: #1b1b1b; /* Set text color for error messages */
+  margin-bottom: 5px; /* Space between items */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+.warning-icon {
+  margin-right: 5px; /* Space between icon and text */
+  color: #414040; /* Set color for the warning icon */
+  font-size: 1.5em; /* Increase size of the icon */
+}
+
+.popup button {
+  background: coral; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 10px 25px;
+  
+}

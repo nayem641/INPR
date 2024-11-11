@@ -1,0 +1,22 @@
+.step-btn-conatiner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+}
+.step-btn-conatiner>span{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: rgb(5, 137, 177);
+  font-weight: bold;
+  margin: 10px 40px;
+  cursor: pointer;
+}
+span>.step-btn{
+    font-size: 30px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

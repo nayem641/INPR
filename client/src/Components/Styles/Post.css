@@ -1,0 +1,214 @@
+.post-container {
+  width: 100vw;
+  height: auto;
+  margin-top: 3px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: 2px -2px 2px rgba(202, 202, 202, 0.4);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(202, 202, 202, 0.2);
+}
+
+.postContainer-Uppersection {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 6px rgba(121, 120, 120, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.post-owner {
+  display: flex;
+  align-items: center;
+}
+.post-owner > img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid rgb(157, 157, 224);
+}
+.post-owner > div > p {
+  color: rgb(80, 79, 79);
+  font-weight: 500;
+  margin-right: 10px;
+}
+div > span > a {
+  color: #343436;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: bold;
+}
+div > span > a:hover {
+  color: #0560b6;
+}
+.post-Controll {
+  margin-right: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.post-interactions :hover {
+  color: #2b86db;
+}
+.postBody-container {
+  /* padding: 5px; */
+  display: flex;
+  flex-direction: column;
+}
+.post-caption {
+  font-size: 18px;
+  color: rgba(10, 10, 10, 0.9);
+  padding: 10px;
+  height: auto;
+  line-height: 1.1;
+  word-break: break-word;
+  max-width: 100vw;
+  overflow-wrap: break-word;
+}
+.post-photos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f9;
+}
+.post-photos > img {
+  width: 98%;
+  object-fit: cover;
+  border-radius: 5px;
+
+}
+
+.post-interactions {
+  box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.1),
+    0 5px 5px -5px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 5px 0;
+  padding: 5px;
+}
+.post-interactions > div:hover {
+  color: #2b86db;
+  cursor: pointer;
+}
+.post-interactions > div {
+  display: flex;
+  background-color: #f0f2f5;
+  width: 85px;
+  height: 40px;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+}
+span {
+  color: #5d5d5e;
+}
+.post-interaction-icon {
+  margin-right: 5px;
+  font-size: 25px;
+  color: rgb(99, 98, 98);
+  cursor: pointer;
+}
+
+/* Animation for no post */
+/* Container for the emoji */
+
+.emoji-container {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5;
+}
+
+/* Main emoji styling */
+.sad-emoji {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background-color: #ffd1d1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounce 2s infinite;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Eyes styling */
+.eyes {
+  position: absolute;
+  top: 35%;
+  display: flex;
+  gap: 20px;
+}
+
+.eye {
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border-radius: 50%;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 25px;
+  width: 40px;
+  height: 20px;
+  border-bottom: 3px solid #333;
+  border-radius: 0 0 30px 30px;
+  transform: rotate(180deg);
+}
+
+/* Tears */
+.tear {
+  position: absolute;
+  width: 10px;
+  height: 20px;
+  background-color: #00bfff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: tearDrop 1.5s infinite;
+}
+
+.left-tear {
+  left: 30px;
+  top: 45px;
+  animation-delay: 0.3s;
+}
+
+.right-tear {
+  right: 30px;
+  top: 45px;
+  animation-delay: 0.6s;
+}
+
+/* Keyframe animations */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes tearDrop {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}

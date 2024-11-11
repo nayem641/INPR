@@ -1,0 +1,75 @@
+.profile-skeleton-loader {
+    width: 100vw;                  /* Full width for mobile screens */
+    padding: 16px;                /* Padding for the container */
+    background-color: #fff;       /* Background color for better contrast */
+}
+
+.skeleton-cover-photo {
+    width: 100%;                  /* Full width for the cover photo */
+    height: 200px;                /* Height for the cover photo */
+    background: linear-gradient(135deg, #ece9e6, #ffffff); /* Gradient effect */
+    border-radius: 8px;          /* Rounded corners */
+    margin-bottom: 20px;         /* Spacing below the cover photo */
+    animation: pulse 1.5s infinite; /* Animation effect */
+}
+
+.skeleton-profile-pic {
+    width: 100px;                 /* Width for profile picture */
+    height: 100px;                /* Height for profile picture */
+    background: linear-gradient(135deg, #f0f0f0, #d9d9d9); /* Gradient for profile pic */
+    border-radius: 50%;          /* Circular shape */
+    position: relative;
+    top: -70px;                  /* Position above the cover photo */
+    margin-left: 16px;           /* Left margin */
+    animation: pulse 1.5s infinite; /* Animation effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.skeleton-info {
+    padding-top: 40px;           /* Spacing for text */
+}
+
+.skeleton-name {
+    width: 60%;                   /* Width for name */
+    height: 20px;                 /* Height for name */
+    background-color: #f0f0f0;   /* Light gray background */
+    border-radius: 4px;          /* Rounded corners */
+    margin-bottom: 10px;         /* Margin below name */
+    animation: pulse 1.5s infinite; /* Animation effect */
+}
+
+.skeleton-bio {
+    width: 40%;                   /* Width for bio */
+    height: 15px;                 /* Height for bio */
+    background-color: #f0f0f0;   /* Light gray background */
+    border-radius: 4px;          /* Rounded corners */
+    margin-bottom: 15px;         /* Margin below bio */
+    animation: pulse 1.5s infinite; /* Animation effect */
+}
+
+.skeleton-details {
+    display: flex;
+    flex-direction: column;       /* Stack details vertically */
+}
+
+.skeleton-detail-item {
+    width: 80%;                   /* Width for detail items */
+    height: 15px;                 /* Height for detail items */
+    background-color: #f0f0f0;   /* Light gray background */
+    border-radius: 4px;          /* Rounded corners */
+    margin: 5px 0;               /* Margin between items */
+    animation: pulse 1.5s infinite; /* Animation effect */
+}
+
+/* Pulse animation for skeleton effect */
+@keyframes pulse {
+    0% {
+        background-color: #f0f0f0;
+    }
+    50% {
+        background-color: #d0d0d0; /* Darker gray for the pulse effect */
+    }
+    100% {
+        background-color: #f0f0f0;
+    }
+}
