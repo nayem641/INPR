@@ -395,8 +395,8 @@ const Signup = () => {
                 <img
                   src={
                     uploading
-                      ? "/public/uploading.gif"
-                      : "/public/placeholder.webp"
+                      ? "/uploading.gif"
+                      : "/placeholder.webp"
                   }
                   height={"120px"}
                 />
