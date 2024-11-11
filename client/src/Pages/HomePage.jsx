@@ -3,17 +3,9 @@ import Navigationbar from "../Components/Navigationbar";
 import CreatePost from "../Components/CreatePost";
 import Story from "../Components/Story";
 import Posts from "../Components/Posts";
-import { useEffect } from "react";
 
 function HomePage() {
-  const navigate=useEffect()
-  useEffect(()=>{
-    const user_id=JSON.parse(localStorage.getItem("user_id"))
-    if(!user_id){
-      localStorage.removeItem("user_id")
-      navigate("/login")
-    }  
-  },[])
+
   return (
     <div className="homepage">
       <Titlebar />
