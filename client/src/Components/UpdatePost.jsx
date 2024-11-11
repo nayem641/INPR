@@ -19,7 +19,7 @@ function UpdatePost() {
   //////--------Retrieving data from Database----------////////
   const getUpdateAblePost = async () => {
     setLoadingPost(true);
-    const response = await axios.get(`http://localhost:3000/posts/${post_id}`);
+    const response = await axios.get(`https://inpr.onrender.com/posts/${post_id}`);
     setText(response.data.text);
  
     setLoadingPost(false);
@@ -38,7 +38,7 @@ function UpdatePost() {
       setUpdating(true);
       const postObject = { text };
       const response = await axios.put(
-        `http://localhost:3000/posts/${post_id}`,
+        `https://inpr.onrender.com/posts/${post_id}`,
         postObject
       );
       setUpdating(false);
