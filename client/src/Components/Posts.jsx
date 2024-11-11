@@ -10,7 +10,7 @@ function Posts() {
   const getPosts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/posts/");
+      const response = await axios.get("https://inpr.onrender.com/posts/");
       setPosts(response.data);
       setLoading(false);
     } catch (error) { 
