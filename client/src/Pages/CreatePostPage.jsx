@@ -70,12 +70,12 @@ function CreatePostPage() {
       }
       setPosting(true);
       const authorId = JSON.parse(localStorage.getItem("user_id"));
-      const author = await axios.get(`http://localhost:3000/users/${authorId}`);
+      const author = await axios.get(`https://inpr.onrender.com/users/${authorId}`);
       const authorName = author.data.user.firstName+" "+author.data.user.lastName;
       const authorPp = author.data.user.profilePic;
       const postObject = { text, image,video, authorId, authorName, authorPp };
       const response = await axios.post(
-        "http://localhost:3000/posts/",
+        "https://inpr.onrender.com/posts/",
         postObject
       );
       setPosting(false);
