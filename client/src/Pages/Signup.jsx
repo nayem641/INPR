@@ -77,7 +77,7 @@ const Signup = () => {
       return
     }
     else{
-        fetch("http://localhost:3000/auth/signup", {
+        fetch("https://inpr.onrender.com/auth/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
