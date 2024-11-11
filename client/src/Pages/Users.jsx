@@ -9,7 +9,7 @@ function Users() {
 
   const [users,setUsers] = useState([]);
   useEffect(()=>{
-    fetch("http://localhost:3000/users")
+    fetch("https://inpr.onrender.com/users")
      .then(res=>res.json())
      .then((data)=>{
        setUsers(data)
