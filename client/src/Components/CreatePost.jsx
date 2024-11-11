@@ -7,7 +7,7 @@ function CreatePost() {
   const [author,setAuthor]=useState({})
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const getAuthor = async () => {
-    const response = await axios.get(`http://localhost:3000/users/${user_id}`);
+    const response = await axios.get(`https://inpr.onrender.com/users/${user_id}`);
     setAuthor(response.data.user)
   };
   useEffect(() => {getAuthor()}, []);
