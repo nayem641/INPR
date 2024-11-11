@@ -10,7 +10,7 @@ const authRouter = require("./routes/auth.route");
 const postRouter = require("./routes/post.route");
 
 //cors setup
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://inpr-client.onrender.com" }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
