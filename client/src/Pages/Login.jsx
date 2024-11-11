@@ -18,7 +18,7 @@ const Login = () => {
       console.log("Please fill all fields");
     }
     //------send LOGIN  request to server-------
-    fetch("http://localhost:3000/auth/login", {
+    fetch("https://inpr.onrender.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
