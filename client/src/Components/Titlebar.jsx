@@ -71,9 +71,9 @@ function Titlebar() {
 
       <h1 className="gradient-text">InprBOOK</h1>
       <div className="titlebar-icon">
-        <IoSearchSharp
+        {/* <IoSearchSharp
           className="search menu-icon"
-        />
+        /> */}
         <AiOutlineMenu
           className="menu-icon"
           onClick={openMenuCard}
