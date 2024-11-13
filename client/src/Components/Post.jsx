@@ -121,7 +121,7 @@ function Post({ post ,index}) {
                     borderBottom: "1px solid #f0f0f0",
                   }}
                 >
-                  Save Post
+                  Edit Post
                 </div>
                 <div
                   onClick={() => handleOptionClick("copy")}
