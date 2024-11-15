@@ -5,70 +5,24 @@ import { BiLike } from "react-icons/bi";
 import { FaRegCommentDots } from "react-icons/fa6";
 import { PiShareFatLight } from "react-icons/pi";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { useNavigate } from "react-router";
 
-function Post({ post ,index}) {
+import { useNavigate } from "react-router";
+import axios from "axios";
+
+function Post({ post }) {
   const navigate = useNavigate();
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
   };
 
-  const handleOptionClick = (option) => {
+  const deletePost = async (postId) => {
+    const response = await axios.delete(
+      `http://localhost:3000/posts/${postId}`
+    );
     setIsPopupVisible(false);
-    switch (option) {
-      case "save":
-        navigate('/updatepost',{state:post._id})
-        break;
-      case "copy":
-        navigator.clipboard.writeText(window.location.href);
-        toast.success("Link copied!");
-        break;
-      case "follow":
-        toast.info(`Following ${post.authorName}`);
-        break;
-      case "report":
-        toast.error("Post reported.");
-        break;
-      default:
-        break;
-    }
-  };
-
-
-  const videoRefs = useRef([]);
-  const [activeVideo, setActiveVideo] = useState(null);
-  const [controlsVisible, setControlsVisible] = useState(null);
-
-  const handleMouseOver = (index) => {
-    // Play the video on hover
-    if (activeVideo !== null && activeVideo !== index) {
-      videoRefs.current[activeVideo].pause();
-      videoRefs.current[activeVideo].currentTime = 0; // Reset to start
-    }
-    // Set the new active video and play it
-    setActiveVideo(index);
-    videoRefs.current[index].play();
-  };
-
-  const handleMouseLeave = (index) => {
-    // Pause and reset the video when mouse leaves
-    videoRefs.current[index].pause();
-    videoRefs.current[index].currentTime = 0; // Reset to start
-    // Hide controls when mouse leaves
-    setControlsVisible(null);
-  };
-
-  const handleClick = (index) => {
-    // Pause any other active video
-    if (activeVideo !== null && activeVideo !== index) {
-      videoRefs.current[activeVideo].pause();
-      videoRefs.current[activeVideo].currentTime = 0; // Reset to start
-    }
-    // Show controls only for the clicked video
-    setControlsVisible(index);
-    videoRefs.current[index].play();
+    toast.success(response.data.message);
   };
 
   return (
@@ -95,72 +49,42 @@ function Post({ post ,index}) {
 
             {/* Popup menu */}
             {isPopupVisible && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "25px",
-                  right: "0",
-                  backgroundColor: "#f0f2f9",
-                  border: "1px solid #ccc",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                  borderRadius: "8px",
-                  zIndex: 1000,
-                  padding: "8px 0",
-                  width: "140px",
-                  fontFamily: "'Roboto', sans-serif",
-                }}
-              >
-                <div
-                  onClick={() => handleOptionClick("save")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
-                  Edit Post
+              <div className="popup-div">
+                <div className="popup-menu-div" onClick={togglePopup}>
+                  Hide Post
                 </div>
-                <div
-                  onClick={() => handleOptionClick("copy")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
+                <div className="popup-menu-div" onClick={togglePopup}>
                   Copy Link
                 </div>
-                <div
-                  onClick={() => handleOptionClick("follow")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
+                <div className="popup-menu-div" onClick={togglePopup}>
                   Follow This ID
                 </div>
-                <div
-                  onClick={() => handleOptionClick("report")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#d9534f",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}
-                >
+                <div className="popup-menu-div" onClick={togglePopup}>
                   Report Post
                 </div>
+                {user_id === post.authorId && (
+                  <div
+                    className="popup-menu-div"
+                    onClick={() => {
+                      togglePopup;
+                      navigate("/updatepost", { state: post._id });
+                    }}
+                  >
+                    Edit Post
+                  </div>
+                )}
+                {user_id === post.authorId && (
+                  <div
+                    className="popup-menu-div"
+                    onClick={() => {
+                      togglePopup;
+                      deletePost(post._id);
+                    }}
+                    style={{ color: "red" }}
+                  >
+                    Delete
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -168,14 +92,16 @@ function Post({ post ,index}) {
 
         <div className="postBody-container">
           <div className="post-caption">{post.text && <p>{post.text}</p>}</div>
-          {post.image &&
-          <div className="post-photos">
-            {post.image && <img src={post.image} alt="" />}
-          </div>}
-          {post.video &&
-          <div style={{padding:"5px", height:"auto"}} >
-            {post.video && <video src={post.video} controls />}
-          </div>}
+          {post.image && (
+            <div className="post-photos">
+              {post.image && <img src={post.image} alt="" />}
+            </div>
+          )}
+          {post.video && (
+            <div style={{ padding: "5px", height: "auto" }}>
+              <video src={post.video} controls />
+            </div>
+          )}
         </div>
 
         <div className="post-interactions">
