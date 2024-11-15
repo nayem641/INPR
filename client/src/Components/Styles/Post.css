@@ -93,17 +93,14 @@ div > span > a:hover {
   align-items: center;
   justify-content: space-around;
   margin: 2px 0;
-  padding: 3px;
+  padding: 2px;
 }
-.post-interactions > div:hover {
- /* color: #2b86db;*/
-  cursor: pointer;
-}
+
 .post-interactions > div {
   display: flex;
   background-color: #f0f2f5;
   width: 85px;
-  height: 36px;
+  height: 30px;
   border-radius: 25px;
   justify-content: center;
   align-items: center;
@@ -113,7 +110,7 @@ span {
 }
 .post-interaction-icon {
   margin-right: 5px;
-  font-size: 25px;
+  font-size: 24px;
   color: rgb(99, 98, 98);
 }
 
