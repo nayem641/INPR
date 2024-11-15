@@ -20,9 +20,8 @@ import axios from "axios";
 import SkeletonLoader from "../Components/SkeletonLoader";
 import FetchingError from "../Components/FetchingError";
 import { useNavigate } from "react-router";
-import { BiLike } from "react-icons/bi";
-import { PiShareFatLight } from "react-icons/pi";
-import { toast } from "react-toastify";
+
+import MyPost from "../Components/myPost";
 
 //////////////////////////////////////////////
 function Profile() {
@@ -43,7 +42,7 @@ function Profile() {
       setLoading(true);
       setError(null);
       const response = await axios.get(
-        `https://inpr.onrender.com/users/${user_id}`
+        `http://localhost:3000/users/${user_id}`
       );
       setLoading(false);
       setError(null);
@@ -57,7 +56,7 @@ function Profile() {
   };
   const getUserPosts = async () => {
     const response = await axios.get(
-      `https://inpr.onrender.com/posts/author/${user_id}`
+      `http://localhost:3000/posts/author/${user_id}`
     );
     await setUserPosts(response.data);
   };
@@ -121,6 +120,7 @@ function Profile() {
             {`${user.firstName} ${user.lastName}`}
           </h1>
           <hr style={{ marginTop: "5px" }} />
+          {/* ---user bio---- */}
           {user.bio && (
             <div
               className="bio"
@@ -139,6 +139,7 @@ function Profile() {
               {user.bio && user.bio}
             </div>
           )}
+          {/* -----Buttons---- */}
           <div className="storyAndEdit">
             <button
               onClick={() => {
@@ -162,7 +163,17 @@ function Profile() {
           </div>
         </div>
 
+
+        {/* profile detailes */}
         <div className="profileDetails">
+          {user.school && (
+            <div className="institute">
+              <span>
+                <FaGraduationCap className="info-icon" />
+                {user.school}
+              </span>
+            </div>
+          )}
           {user.university && (
             <div className="institute">
               <span>
@@ -171,7 +182,7 @@ function Profile() {
               </span>
             </div>
           )}
-          {user.locatiom && (
+          {user.location && (
             <div className="location">
               <span>
                 <FaLocationDot className="info-icon" />
@@ -186,18 +197,15 @@ function Profile() {
             </span>
           </div>
 
-          <div
-            className="seeMoreYourself"
-            onClick={() => {
-              navigate("/aboutme");
-            }}
-          >
+          <div className="seeMoreYourself">
             <span>
               <MdOutlineReadMore className="info-icon" />
               See more...
             </span>
           </div>
         </div>
+
+
 
         {/* friends section */}
         <div className="friends-section">
@@ -206,7 +214,7 @@ function Profile() {
           <hr />
           <div className="friends-container">
             <span className="friend">
-              <img src="/user.png" alt="" />
+              <img src="/avatar1.png" alt="" />
             </span>
             <div className="friend">
               <img src="/avatar2.jpg" alt="" />
@@ -226,6 +234,8 @@ function Profile() {
           </div>
         </div>
 
+
+
         {/* create post */}
         <div className="create-post">
           <h4 style={{ marginLeft: "10px" }}>Posts</h4>
@@ -244,56 +254,18 @@ function Profile() {
             </span>
           </div>
         </div>
-        {/* //////////////--POSTS---//////////////// */}
+
+
+
+        {/* /////--POSTS---///// */}
         {userPosts &&
           userPosts
             .slice()
             .reverse()
             .map((post) => {
-              return (
-                <div
-                  className="post-container"
-                  key={post._id}
-                  onClick={() => {}}
-                >
-                  <div className="postContainer-Uppersection">
-                    <div className="post-owner">
-                      {user.profilePic && <img src={user.profilePic} />}
-                      <div>
-                        <span>
-                          <a href="">{user.firstName + " " + user.lastName}</a>
-                        </span>
-                        <p>2 days </p>
-                      </div>
-                    </div>
-                    <BsThreeDots className="post-Controll" />
-                  </div>
-                  <div className="postBody-container">
-                    <div className="post-caption">
-                      {post.text && <p>{post.text}</p>}
-                    </div>
-                    <div className="post-photos">
-                      {post.image && <img src={post.image} />}
-                    </div>
-                  </div>
-                  <div className="post-interactions">
-                    <div>
-                      <BiLike className="post-interaction-icon" />
-                      <span>15</span>
-                    </div>
-                    <div>
-                      <FaRegCommentDots className="post-interaction-icon" />
-                      <span>30</span>
-                    </div>
-                    <div>
-                      <PiShareFatLight className="post-interaction-icon" />
-                      <span>12k</span>
-                    </div>
-                  </div>
-                </div>
-              );
+              return <MyPost post={post} />;
             })}
-        {/* ----------------------------- */}
+
         <WelcomeProfile user={user} />
       </div>
     );
