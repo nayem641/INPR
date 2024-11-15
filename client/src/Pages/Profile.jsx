@@ -20,11 +20,16 @@ import axios from "axios";
 import SkeletonLoader from "../Components/SkeletonLoader";
 import FetchingError from "../Components/FetchingError";
 import { useNavigate } from "react-router";
-
-import MyPost from "../Components/myPost";
+import { BiLike } from "react-icons/bi";
+import { PiShareFatLight } from "react-icons/pi";
+import { toast } from "react-toastify";
 
 //////////////////////////////////////////////
 function Profile() {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const togglePopup = () => {
+    setIsPopupVisible(!isPopupVisible);
+  };
   const navigate = useNavigate();
   const user_id = JSON.parse(localStorage.getItem("user_id"));
   const [user, setUser] = useState({});
@@ -120,7 +125,6 @@ function Profile() {
             {`${user.firstName} ${user.lastName}`}
           </h1>
           <hr style={{ marginTop: "5px" }} />
-          {/* ---user bio---- */}
           {user.bio && (
             <div
               className="bio"
@@ -139,7 +143,6 @@ function Profile() {
               {user.bio && user.bio}
             </div>
           )}
-          {/* -----Buttons---- */}
           <div className="storyAndEdit">
             <button
               onClick={() => {
@@ -163,17 +166,7 @@ function Profile() {
           </div>
         </div>
 
-
-        {/* profile detailes */}
         <div className="profileDetails">
-          {user.school && (
-            <div className="institute">
-              <span>
-                <FaGraduationCap className="info-icon" />
-                {user.school}
-              </span>
-            </div>
-          )}
           {user.university && (
             <div className="institute">
               <span>
@@ -182,7 +175,7 @@ function Profile() {
               </span>
             </div>
           )}
-          {user.location && (
+          {user.locatiom && (
             <div className="location">
               <span>
                 <FaLocationDot className="info-icon" />
@@ -197,15 +190,18 @@ function Profile() {
             </span>
           </div>
 
-          <div className="seeMoreYourself">
+          <div
+            className="seeMoreYourself"
+            onClick={() => {
+              navigate("/aboutme");
+            }}
+          >
             <span>
               <MdOutlineReadMore className="info-icon" />
               See more...
             </span>
           </div>
         </div>
-
-
 
         {/* friends section */}
         <div className="friends-section">
@@ -214,7 +210,7 @@ function Profile() {
           <hr />
           <div className="friends-container">
             <span className="friend">
-              <img src="/avatar1.png" alt="" />
+              <img src="/user.png" alt="" />
             </span>
             <div className="friend">
               <img src="/avatar2.jpg" alt="" />
@@ -234,9 +230,7 @@ function Profile() {
           </div>
         </div>
 
-
-
-        {/* create post */} 
+        {/* create post */}
         <div className="create-post">
           <h4 style={{ marginLeft: "10px" }}>Posts</h4>
           <CreatePost />
@@ -254,18 +248,130 @@ function Profile() {
             </span>
           </div>
         </div>
-
-
-
-        {/* /////--POSTS---///// */}
+        {/* //////////////--POSTS---//////////////// */}
         {userPosts &&
           userPosts
             .slice()
             .reverse()
             .map((post) => {
-              return <MyPost post={post} />;
-            })}
+              return (
+                <div
+                  className="post-container"
+                  key={post._id}
+                  onClick={() => {}}
 
+                >
+                                     
+
+
+                  <div className="postContainer-Uppersection" style={{position:"relative"}}>
+                    <div className="post-owner">
+                      {user.profilePic && <img src={user.profilePic} />}
+                      <div>
+                        <span>
+                          <a href="">{user.firstName + " " + user.lastName}</a>
+                        </span>
+                        <p>2 days </p>
+                      </div>
+                    </div>
+                    <BsThreeDots className="post-Controll" onClick={togglePopup}/>
+                    {/* {isPopupVisible && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "45px",
+                  right: "5px",
+                  backgroundColor: "#f0f2f9",
+                  border: "1px solid #ccc",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "2px",
+       
+                  padding: "8px 0",
+                  // width: "140px",
+                  // fontFamily: "'Roboto', sans-serif",
+                }}
+              >
+                <div
+                  onClick={() => handleOptionClick("save")}
+                  style={{
+                    padding: "8px 12px",
+                    cursor: "pointer",
+                    color: "#333",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    borderBottom: "1px solid #f0f0f0",
+                  }}
+                >
+                  Save Post
+                </div>
+                <div
+                  onClick={() => handleOptionClick("copy")}
+                  style={{
+                    padding: "8px 12px",
+                    cursor: "pointer",
+                    color: "#333",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    borderBottom: "1px solid #f0f0f0",
+                  }}
+                >
+                  Copy Link
+                </div>
+                <div
+                  onClick={() => handleOptionClick("follow")}
+                  style={{
+                    padding: "8px 12px",
+                    cursor: "pointer",
+                    color: "#333",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    borderBottom: "1px solid #f0f0f0",
+                  }}
+                >
+                  Follow This ID
+                </div>
+                <div
+                  onClick={() => handleOptionClick("report")}
+                  style={{
+                    padding: "8px 12px",
+                    cursor: "pointer",
+                    color: "#d9534f",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                  }}
+                >
+                  Report Post
+                </div>
+              </div>
+            )} */}
+                  </div>
+                  <div className="postBody-container">
+                    <div className="post-caption">
+                      {post.text && <p>{post.text}</p>}
+                    </div>    
+                    <div className="post-photos">
+                      {post.image && <img src={post.image} />}
+
+                    </div>
+                  </div>
+                  <div className="post-interactions">
+                    <div>
+                      <BiLike className="post-interaction-icon" />
+                      <span>15</span>
+                    </div>
+                    <div>
+                      <FaRegCommentDots className="post-interaction-icon" />
+                      <span>30</span>
+                    </div>
+                    <div>
+                      <PiShareFatLight className="post-interaction-icon" />
+                      <span>12k</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        {/* ----------------------------- */}
         <WelcomeProfile user={user} />
       </div>
     );
@@ -273,3 +379,4 @@ function Profile() {
 }
 
 export default Profile;
+
