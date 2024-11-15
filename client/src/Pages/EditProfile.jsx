@@ -62,6 +62,7 @@ function EditProfile() {
   const [madrasha, setMadrasha] = useState("");
 
   /////////-----------------Other States----------------//////////
+  const [updating,setUpdating]=useState(false)
   ///////------retrieve loggedin user data first----------------/////
 
   useEffect(() => {
@@ -71,7 +72,7 @@ function EditProfile() {
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     try {
       const response = await axios.get(
-        `https://inpr.onrender.com/users/${user_id}`
+        `http://localhost:3000/users/${user_id}`
       );
 
       setFirstName(response.data.user.firstName);
@@ -144,7 +145,7 @@ function EditProfile() {
   const updateInfo = async (e) => {
     e.preventDefault();
     //update posts database with useri_id
-
+    setUpdating(true)
     const userObject = {
       firstName,
       lastName,
@@ -169,7 +170,7 @@ function EditProfile() {
       }
 
       const response = await axios.put(
-        `https://inpr.onrender.com/users/${user_id}`,
+        `http://localhost:3000/users/${user_id}`,
         userObject
       );
       const authorId = response.data.user._id;
@@ -179,9 +180,10 @@ function EditProfile() {
           response.data.user.firstName + " " + response.data.user.lastName,
       };
       const updatedPost = await axios.put(
-        `https://inpr.onrender.com/posts/author/${authorId}`,
+        `http://localhost:3000/posts/author/${authorId}`,
         post
       );
+      setUpdating(false)
       toast.success(response.data.message);
       navigate("/profile");
     } catch (error) {
@@ -232,7 +234,7 @@ function EditProfile() {
                 id="profile-image-input"
               />
               <label htmlFor="profile-image-input">
-                <Button variant="contained" color="primary" component="span">
+                <Button variant="contained" color="info" component="span">
                   change Photo
                 </Button>
               </label>
@@ -249,7 +251,7 @@ function EditProfile() {
               id="cover-image-input"
             />
             <label htmlFor="cover-image-input">
-              <Button variant="contained" color="primary" component="span">
+              <Button variant="contained" color="info" component="span">
                 Change cover Photo
               </Button>
             </label>
@@ -583,10 +585,10 @@ function EditProfile() {
             <Button
               style={{}}
               variant="contained"
-              color="secondary"
+              color={updating?"warning":"secondary"}
               onClick={updateInfo}
             >
-              Save Changes
+             {updating ? "Profile Updatng...":" Save Changes"}
             </Button>
           </div>
         </Paper>
