@@ -236,7 +236,7 @@ function Profile() {
 
 
 
-        {/* create post */}
+        {/* create post */} 
         <div className="create-post">
           <h4 style={{ marginLeft: "10px" }}>Posts</h4>
           <CreatePost />
