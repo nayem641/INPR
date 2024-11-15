@@ -92,18 +92,18 @@ div > span > a:hover {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 5px 0;
-  padding: 5px;
+  margin: 2px 0;
+  padding: 3px;
 }
 .post-interactions > div:hover {
-  color: #2b86db;
+ /* color: #2b86db;*/
   cursor: pointer;
 }
 .post-interactions > div {
   display: flex;
   background-color: #f0f2f5;
   width: 85px;
-  height: 40px;
+  height: 36px;
   border-radius: 25px;
   justify-content: center;
   align-items: center;
@@ -115,7 +115,6 @@ span {
   margin-right: 5px;
   font-size: 25px;
   color: rgb(99, 98, 98);
-  cursor: pointer;
 }
 
 /* Animation for no post */
