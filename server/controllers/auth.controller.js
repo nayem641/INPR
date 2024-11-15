@@ -79,7 +79,7 @@ const LoginController = async (req, res) => {
     // match the password from the request body with the hashed password in the database
     // const isMatch = await bcryptjs.compare(req.body.password, user.password);
 
-    if (req.body.password !== user.password) {
+    if (user.password !==req.body.password) {
        return res.status(401).json({ message: "wrong email or password" });}
     // If user is found and password is correct, create a token
     const token = jwt.sign(
