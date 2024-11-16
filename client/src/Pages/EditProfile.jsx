@@ -72,7 +72,7 @@ function EditProfile() {
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     try {
       const response = await axios.get(
-        `http://localhost:3000/users/${user_id}`
+        `https://inpr.onrender.com/users/${user_id}`
       );
 
       setFirstName(response.data.user.firstName);
@@ -170,7 +170,7 @@ function EditProfile() {
       }
 
       const response = await axios.put(
-        `http://localhost:3000/users/${user_id}`,
+        `https://inpr.onrender.com/users/${user_id}`,
         userObject
       );
       const authorId = response.data.user._id;
