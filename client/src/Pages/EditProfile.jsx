@@ -143,8 +143,7 @@ function EditProfile() {
 
   const updateInfo = async (e) => {
     e.preventDefault();
-    //update posts database with useri_id
-    setUpdating(true);
+
     const userObject = {
       firstName,
       lastName,
@@ -187,7 +186,9 @@ function EditProfile() {
       toast.success(response.data.message);
       navigate("/profile");
     } catch (error) {
+      setUpdating(false);
       console.log(error);
+      toast.error(error.message)
     }
   };
 
