@@ -50,9 +50,7 @@ function Post({ post }) {
             {/* Popup menu */}
             {isPopupVisible && (
               <div className="popup-div">
-                <div className="popup-menu-div" onClick={togglePopup}>
-                  Hide Post
-                </div>
+       
                 <div className="popup-menu-div" onClick={togglePopup}>
                   Copy Link
                 </div>
