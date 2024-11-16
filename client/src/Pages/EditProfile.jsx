@@ -225,7 +225,7 @@ function EditProfile() {
             <Avatar
               src={ppuploading ? "/pp.gif" : profilePic}
               alt="Profile Picture"
-              style={{ width: "110px", height: "110px", marginRight: "10px" }}
+              style={{ width: "110px", height: "110px", margin: "5px auto" }}
             />
             <div>
               <input
@@ -236,9 +236,16 @@ function EditProfile() {
                 id="profile-image-input"
               />
               <label htmlFor="profile-image-input">
-                <Button variant="contained" color="info" component="span">
-                  change Photo
-                </Button>
+                <button style={{
+                  padding:"5px 8px",
+                  fontSize:"17px",
+                  borderRadius:"10x",
+                  color:"darkcyan",
+                  backgroundColor:"rgba(0,0,0,.2)",
+                  marginRight:"0"
+                }}>
+                  Change Photo
+                </button>
               </label>
             </div>
           </div>
@@ -253,9 +260,17 @@ function EditProfile() {
               id="cover-image-input"
             />
             <label htmlFor="cover-image-input">
-              <Button variant="contained" color="info" component="span">
-                Change cover Photo
-              </Button>
+              <button 
+              style={{
+                padding:"5px 8px",
+                fontSize:"17px",
+                borderRadius:"10x",
+                color:"darkcyan",
+                backgroundColor:"rgba(0,0,0,.2)",
+             
+              }}>
+                Choose New
+              </button>
             </label>
 
             {coverPhoto ? (
