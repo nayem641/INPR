@@ -56,12 +56,8 @@ function MyPost({ post }) {
                 <div className="popup-menu-div" onClick={togglePopup}>
                   Copy Link
                 </div>
-                <div className="popup-menu-div" onClick={togglePopup}>
-                  Follow This ID
-                </div>
-                <div className="popup-menu-div" onClick={togglePopup}>
-                  Report Post
-                </div>
+      
+               
                 {user_id === post.authorId && (
                   <div
                     className="popup-menu-div"
