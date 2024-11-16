@@ -56,7 +56,7 @@ function Profile() {
       setLoading(true);
       setError(null);
       const response = await axios.get(
-        `http://localhost:3000/users/${user_id}`
+        `https://inpr.onrender.com/users/${user_id}`
       );
       setLoading(false);
       setError(null);
@@ -70,7 +70,7 @@ function Profile() {
   };
   const getUserPosts = async () => {
     const response = await axios.get(
-      `http://localhost:3000/posts/author/${user_id}`
+      `https://inpr.onrender.com/posts/author/${user_id}`
     );
     await setUserPosts(response.data);
   };
