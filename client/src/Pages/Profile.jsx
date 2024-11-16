@@ -349,7 +349,7 @@ function Profile() {
                 //     </div>
                 //   </div>
                 // </div>
-                <MyPost/>
+                <MyPost post={post}/>
               );
             })}
         {/* ----------------------------- */}
