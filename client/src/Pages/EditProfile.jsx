@@ -184,8 +184,8 @@ function EditProfile() {
       );
       setUpdating(false);
       console.log(updatedPost)
-      // toast.success(response.data.message);
-      // navigate("/profile");
+      toast.success(response.data.message);
+      navigate("/profile");
     } catch (error) {
       setUpdating(false);
       console.log(error);
