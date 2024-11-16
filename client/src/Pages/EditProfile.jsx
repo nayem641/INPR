@@ -179,12 +179,13 @@ function EditProfile() {
           response.data.user.firstName + " " + response.data.user.lastName,
       };
       const updatedPost = await axios.put(
-        `http://localhost:3000/posts/author/${authorId}`,
+        `https://inpr.onrender.com/posts/author/${authorId}`,
         post
       );
       setUpdating(false);
-      toast.success(response.data.message);
-      navigate("/profile");
+      console.log(updatedPost)
+      // toast.success(response.data.message);
+      // navigate("/profile");
     } catch (error) {
       setUpdating(false);
       console.log(error);

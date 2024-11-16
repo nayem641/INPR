@@ -26,8 +26,6 @@ const GetUserByIdController = async (req, res) => {
 // update a user by id
 const UpdateUserByIdController = async (req, res) => {
   try {
-    // const post=await PostModel.updateMany({authorId:req.params.id},{authorPp:req.body.profilePic},{new:true})
-    // console.log(post)
     const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -42,7 +40,7 @@ const UpdateUserByIdController = async (req, res) => {
       message: "Profile updated ",
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({  message: "updation failed" });
   }
 };
 
@@ -83,20 +81,6 @@ const DeleteAllUsersController = async (req, res) => {
 };
 
 // ------------------------ Operations Based On Email---------------------
-
-//get a user by email
-const GetUserByEmailController = async (req, res) => {
-  try {
-    const existuser = await UserModel.findOne({ email: req.params.email });
-    if (!existuser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// update a user by email
 
 /////////////////////////////////////////////////////////////////////////
 // export all controllers
