@@ -223,7 +223,7 @@ function EditProfile() {
             }}
           >
             <Avatar
-              src={ppuploading ? "/pp.gif" : profilePic}
+              src={ppuploading ? "/ppp.gif" : profilePic}
               alt="Profile Picture"
               style={{ width: "110px", height: "110px", margin: "5px auto" }}
             />
