@@ -253,14 +253,14 @@ function EditProfile() {
               id="cover-image-input"
             />
             <label htmlFor="cover-image-input">
-              <Button variant="contained" color="info" component="span">
+              <button style={{marginLeft:"20px"}} >
                 Change cover 
-              </Button>
+              </button>
             </label>
             <label htmlFor="profile-image-input">
-                <Button variant="contained" color="info" component="span">
+                <button >
                   change Photo
-                </Button>
+                </button>
               </label>
 
             {coverPhoto ? (
