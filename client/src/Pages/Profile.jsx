@@ -13,7 +13,7 @@ import WelcomeProfile from "../Components/WelcomeProfile";
 import "./Styles/Profile.css";
 import "../Components/Styles/Post.css";
 import CreatePost from "../Components/CreatePost";
-import Post from "../Components/Post";
+
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,6 +23,7 @@ import { useNavigate } from "react-router";
 import { BiLike } from "react-icons/bi";
 import { PiShareFatLight } from "react-icons/pi";
 import { toast } from "react-toastify";
+
 
 //////////////////////////////////////////////
 function Profile() {
@@ -36,6 +37,14 @@ function Profile() {
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const deletePost = async (postId) => {
+    const response = await axios.delete(
+      `http://localhost:3000/posts/${postId}`
+    );
+    setIsPopupVisible(false);
+    toast.success(response.data.message);
+  };
 
   const getUser = async () => {
     const user_id = JSON.parse(localStorage.getItem("user_id"));
@@ -255,105 +264,74 @@ function Profile() {
             .reverse()
             .map((post) => {
               return (
-                <div
-                  className="post-container"
-                  key={post._id}
-                  onClick={() => {}}
-
-                >
-                                     
-
-
-                  <div className="postContainer-Uppersection" style={{position:"relative"}}>
+                <div className="post-container">
+                  <div className="postContainer-Uppersection">
                     <div className="post-owner">
-                      {user.profilePic && <img src={user.profilePic} />}
+                      <img src={post.authorPp} alt="" />
                       <div>
                         <span>
-                          <a href="">{user.firstName + " " + user.lastName}</a>
+                          <a href="">{post.authorName}</a>
                         </span>
-                        <p>2 days </p>
+                        <p>2 days ago</p>
                       </div>
                     </div>
-                    <BsThreeDots className="post-Controll" onClick={togglePopup}/>
-                    {/* {isPopupVisible && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "45px",
-                  right: "5px",
-                  backgroundColor: "#f0f2f9",
-                  border: "1px solid #ccc",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                  borderRadius: "2px",
-       
-                  padding: "8px 0",
-                  // width: "140px",
-                  // fontFamily: "'Roboto', sans-serif",
-                }}
-              >
-                <div
-                  onClick={() => handleOptionClick("save")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
-                  Save Post
-                </div>
-                <div
-                  onClick={() => handleOptionClick("copy")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
-                  Copy Link
-                </div>
-                <div
-                  onClick={() => handleOptionClick("follow")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    borderBottom: "1px solid #f0f0f0",
-                  }}
-                >
-                  Follow This ID
-                </div>
-                <div
-                  onClick={() => handleOptionClick("report")}
-                  style={{
-                    padding: "8px 12px",
-                    cursor: "pointer",
-                    color: "#d9534f",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}
-                >
-                  Report Post
-                </div>
-              </div>
-            )} */}
+
+                    <div style={{ position: "relative" }}>
+                      {/* Three Dots Icon */}
+                      <BsThreeDots
+                        onClick={togglePopup}
+                        className="post-Controll"
+                        style={{ cursor: "pointer" }}
+                      />
+
+                      {isPopupVisible && (
+                        <div className="popup-div">
+                          <div
+                            onClick={() => {
+                              navigate("/updatepost", { state: post._id });
+                            }}
+                            className="popup-menu-div edit"
+                          >
+                            Edit
+                          </div>
+                          <div className="popup-menu-div copylink">
+                            Copy Link
+                          </div>
+                          <div
+                            className="popup-menu-div hide"
+                            onClick={() => {}}
+                          >
+                            Hide Post
+                          </div>
+                          <div
+                            className="popup-menu-div delete"
+                            onClick={() => {
+                              deletePost(post._id);
+                            }}
+                          >
+                            Delete
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
+
                   <div className="postBody-container">
                     <div className="post-caption">
                       {post.text && <p>{post.text}</p>}
-                    </div>    
-                    <div className="post-photos">
-                      {post.image && <img src={post.image} />}
-
                     </div>
+                    {post.image && (
+                      <div className="post-photos">
+                        {post.image && <img src={post.image} alt="" />}
+                      </div>
+                    )}
+                    {post.video && (
+                      <div style={{ padding: "5px", height: "auto" }}>
+                        <video src={post.video} controls />
+                      </div>
+                    )}
                   </div>
+
                   <div className="post-interactions">
                     <div>
                       <BiLike className="post-interaction-icon" />
@@ -379,4 +357,3 @@ function Profile() {
 }
 
 export default Profile;
-
