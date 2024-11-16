@@ -308,6 +308,7 @@ function Profile() {
                             onClick={() => {
                               deletePost(post._id);
                             }}
+                            style={{color:"red"}}
                           >
                             Delete
                           </div>
