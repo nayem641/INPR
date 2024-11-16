@@ -235,11 +235,11 @@ function EditProfile() {
                 style={{ display: "none" }}
                 id="profile-image-input"
               />
-              <label htmlFor="profile-image-input">
+              {/* <label htmlFor="profile-image-input">
                 <Button variant="contained" color="info" component="span">
                   change Photo
                 </Button>
-              </label>
+              </label> */}
             </div>
           </div>
 
@@ -254,9 +254,14 @@ function EditProfile() {
             />
             <label htmlFor="cover-image-input">
               <Button variant="contained" color="info" component="span">
-                Change cover Photo
+                Change cover 
               </Button>
             </label>
+            <label htmlFor="profile-image-input">
+                <Button variant="contained" color="info" component="span">
+                  change Photo
+                </Button>
+              </label>
 
             {coverPhoto ? (
               <div
