@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navigationbar from "../Components/Navigationbar";
+
 import {
   Avatar,
   Button,
@@ -15,9 +15,8 @@ import {
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
-  FaGenderless,
-  FaSchool,
-  FaBriefcase,
+
+
   FaPlusCircle,
   FaMinusCircle,
 } from "react-icons/fa";
@@ -145,7 +144,7 @@ function EditProfile() {
   const updateInfo = async (e) => {
     e.preventDefault();
     //update posts database with useri_id
-    setUpdating(true)
+
     const userObject = {
       firstName,
       lastName,
@@ -164,6 +163,7 @@ function EditProfile() {
       madrasha,
     };
     try {
+      setUpdating(true)
       const user_id = JSON.parse(localStorage.getItem("user_id"));
       if (!user_id) {
         navigate("/login");

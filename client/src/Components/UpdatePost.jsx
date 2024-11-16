@@ -42,7 +42,7 @@ function UpdatePost() {
         postObject
       );
       setUpdating(false);
-      // console.log(response);
+     
           navigate("/");
 
     } catch (error) {
