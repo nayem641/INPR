@@ -217,8 +217,8 @@ function EditProfile() {
           {/* Profile Picture Section */}
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
+              // display: "flex",
+              // alignItems: "center",
               marginBottom: "10px",
             }}
           >
