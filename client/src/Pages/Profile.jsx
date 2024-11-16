@@ -40,7 +40,7 @@ function Profile() {
 
   const deletePost = async (postId) => {
     const response = await axios.delete(
-      `http://localhost:3000/posts/${postId}`
+      `https://inpr.onrender.com/posts/${postId}`
     );
     setIsPopupVisible(false);
     toast.success(response.data.message);
