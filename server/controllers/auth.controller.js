@@ -1,4 +1,4 @@
-const bcryptjs = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
 require("dotenv").config();
@@ -13,14 +13,14 @@ const SignUpController = async (req, res) => {
         success: false,
       });
     }
-
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     // hash the password
     // create new user object
     const newUser = new UserModel({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       occupation: req.body.occupation,
       phoneNumber: req.body.phoneNumber,
       dateOfBirth: req.body.dateOfBirth,
@@ -76,22 +76,21 @@ const LoginController = async (req, res) => {
       return res
         .status(401)
         .json({ message: "No account created with this email" });
-    // match the password from the request body with the hashed password in the database
-    // const isMatch = await bcryptjs.compare(req.body.password, user.password);
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
 
-    if (!req.body.password) {
+    if (!isMatch) {
        return res.status(401).json({ message: "wrong email or password" });}
     // If user is found and password is correct, create a token
-    const token = jwt.sign(
-      { userId: user._id, email: user.email },
-      "dkfujityokiujkkjiuys",
-      { expiresIn: "1h" }
-    );
+    // const token = jwt.sign(
+    //   { userId: user._id, email: user.email },
+    //   "dkfujityokiujkkjiuys",
+    //   { expiresIn: "1h" }
+    // );
 
     return res.status(200).json({
       message: "Logged in successfully",
       success: true,
-      token: token,
+      // token: token,
       loggedInUser: {
         id: user._id,
       },
@@ -99,7 +98,7 @@ const LoginController = async (req, res) => {
     // server error
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({ message: "Login failed" ,error});
   }
 };
 
