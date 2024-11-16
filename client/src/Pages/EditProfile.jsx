@@ -15,8 +15,8 @@ import {
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
-
-
+  FaSchool,
+  FaBriefcase,
   FaPlusCircle,
   FaMinusCircle,
 } from "react-icons/fa";
@@ -61,7 +61,7 @@ function EditProfile() {
   const [madrasha, setMadrasha] = useState("");
 
   /////////-----------------Other States----------------//////////
-  const [updating,setUpdating]=useState(false)
+  const [updating, setUpdating] = useState(false);
   ///////------retrieve loggedin user data first----------------/////
 
   useEffect(() => {
@@ -144,7 +144,7 @@ function EditProfile() {
   const updateInfo = async (e) => {
     e.preventDefault();
     //update posts database with useri_id
-
+    setUpdating(true);
     const userObject = {
       firstName,
       lastName,
@@ -163,7 +163,7 @@ function EditProfile() {
       madrasha,
     };
     try {
-      setUpdating(true)
+      setUpdating(true);
       const user_id = JSON.parse(localStorage.getItem("user_id"));
       if (!user_id) {
         navigate("/login");
@@ -183,7 +183,7 @@ function EditProfile() {
         `http://localhost:3000/posts/author/${authorId}`,
         post
       );
-      setUpdating(false)
+      setUpdating(false);
       toast.success(response.data.message);
       navigate("/profile");
     } catch (error) {
@@ -585,10 +585,10 @@ function EditProfile() {
             <Button
               style={{}}
               variant="contained"
-              color={updating?"warning":"secondary"}
+              color={updating ? "warning" : "secondary"}
               onClick={updateInfo}
             >
-             {updating ? "Profile Updatng...":" Save Changes"}
+              {updating ? "Profile Updatng..." : " Save Changes"}
             </Button>
           </div>
         </Paper>
