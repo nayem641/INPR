@@ -95,6 +95,7 @@ function Profile() {
             position: "sticky",
             top: "-3px",
             backgroundColor: "white",
+            zIndex:"1000"
           }}
         >
           <IoArrowBack
