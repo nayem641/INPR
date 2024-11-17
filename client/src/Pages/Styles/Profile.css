@@ -154,7 +154,7 @@ hr {
 .friend > img {
   width: 23vw;
   height: 90px;
-  border-radius: 20%;
+  border-radius: 15%;
   border: 2px dotted rgba(17, 115, 243, 0.4);
   cursor: pointer;
   object-fit: cover;
