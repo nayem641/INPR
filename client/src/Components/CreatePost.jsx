@@ -14,17 +14,14 @@ function CreatePost() {
   const navigate = useNavigate();
   return (
     <div className="createPostContainer">
-      {author ? (
-        <img
-          src={author?.profilePic}
-          alt=""
-          onClick={() => {
-            navigate("/profile");
-          }}
-        />
-      ) : (
-        <img src="/user.png" />
-      )}
+      <img
+        src={author?.profilePic}
+        alt="/user.png"
+        onClick={() => {
+          navigate("/profile");
+        }}
+      />
+
       <input
         type="text"
         onClick={() => {
@@ -33,14 +30,7 @@ function CreatePost() {
         placeholder="Create your post here..."
       />
 
-      <img
-        className="photoinput"
-        src="/photos.png"
-        alt="/photos.png"
-        onClick={() => {
-          navigate("/createpost");
-        }}
-      />
+      <FaRegEdit style={{ fontSize: "30px", color: "rgba(0,0,0,.6)" }} />
     </div>
   );
 }
