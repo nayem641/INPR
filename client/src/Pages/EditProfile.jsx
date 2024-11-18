@@ -35,10 +35,10 @@ function EditProfile() {
   const [showBio, setShowBio] = useState(false);
   const [showOtherInfo, setShowOtherInfo] = useState(false);
   const [showPersonalInfo, setShowPersonalInfo] = useState(false); // State for Personal Info
-  // const [profileImage, setProfileImage] = useState(null);
-  // const [coverImage, setCoverImage] = useState(null);
-  // const [showProfileEdit, setShowProfileEdit] = useState(false);
-  // const [showCoverEdit, setShowCoverEdit] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const [showProfileEdit, setShowProfileEdit] = useState(false);
+  const [showCoverEdit, setShowCoverEdit] = useState(false);
   const [ppuploading, setppuploading] = useState(false);
   const [cpuploading, setcpuploading] = useState(false);
   ////-------------INPUT FIELDS states------------------//////////
