@@ -16,7 +16,7 @@ import {
   FaPhone,
   FaMapMarkerAlt,
   FaSchool,
-  FaBriefcase,
+  // FaBriefcase,
   FaPlusCircle,
   FaMinusCircle,
 } from "react-icons/fa";
@@ -35,10 +35,10 @@ function EditProfile() {
   const [showBio, setShowBio] = useState(false);
   const [showOtherInfo, setShowOtherInfo] = useState(false);
   const [showPersonalInfo, setShowPersonalInfo] = useState(false); // State for Personal Info
-  const [profileImage, setProfileImage] = useState(null);
-  const [coverImage, setCoverImage] = useState(null);
-  const [showProfileEdit, setShowProfileEdit] = useState(false);
-  const [showCoverEdit, setShowCoverEdit] = useState(false);
+  // const [profileImage, setProfileImage] = useState(null);
+  // const [coverImage, setCoverImage] = useState(null);
+  // const [showProfileEdit, setShowProfileEdit] = useState(false);
+  // const [showCoverEdit, setShowCoverEdit] = useState(false);
   const [ppuploading, setppuploading] = useState(false);
   const [cpuploading, setcpuploading] = useState(false);
   ////-------------INPUT FIELDS states------------------//////////
@@ -71,7 +71,7 @@ function EditProfile() {
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     try {
       const response = await axios.get(
-        `https://inpr.onrender.com/users/${user_id}`
+        `https://inpr-client.onrender.com/users/${user_id}`
       );
 
       setFirstName(response.data.user.firstName);
@@ -169,7 +169,7 @@ function EditProfile() {
       }
 
       const response = await axios.put(
-        `https://inpr.onrender.com/users/${user_id}`,
+        `https://inpr-client.onrender.com/users/${user_id}`,
         userObject
       );
       const authorId = response.data.user._id;
@@ -179,17 +179,17 @@ function EditProfile() {
           response.data.user.firstName + " " + response.data.user.lastName,
       };
       const updatedPost = await axios.put(
-        `https://inpr.onrender.com/posts/author/${authorId}`,
+        `https://inpr-client.onrender.com/posts/author/${authorId}`,
         post
       );
       setUpdating(false);
-      console.log(updatedPost)
+      console.log(updatedPost);
       toast.success(response.data.message);
       navigate("/profile");
     } catch (error) {
       setUpdating(false);
       console.log(error);
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
@@ -204,46 +204,52 @@ function EditProfile() {
               navigate("/profile");
             }}
           />
-          <h1
+          <h2
             style={{
               marginBottom: "10px",
+              marginTop: "-30px",
               textAlign: "center",
               color: "darkcyan",
             }}
           >
             Edit Profile
-          </h1>
-
-          {/* Profile Picture Section */}
-          <div
-            style={{
-              // display: "flex",
-              // alignItems: "center",
-              marginBottom: "10px",
-            }}
-          >
+          </h2>
+       
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <Avatar
               src={ppuploading ? "/ppp.gif" : profilePic}
               alt="Profile Picture"
-              style={{ width: "110px", height: "110px", margin: "5px auto",border:"4px solid whitesmoke" }}
+              style={{
+                width: "110px",
+                height: "110px",
+                margin: "5px auto",
+                marginLeft: "30vw",
+                border: "3px solid darkcyan",
+                boxShadow:"3px 3px 7px rgba(190,190,190,.7)"
+              }}
             />
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleProfileImageChange}
-                style={{ display: "none" }}
-                id="profile-image-input"
-              />
-              {/* <label htmlFor="profile-image-input">
-                <Button variant="contained" color="info" component="span">
-                  change Photo
-                </Button>
-              </label> */}
-            </div>
+            <label htmlFor="profile-image-input">
+              <span
+                style={{
+                  fontSize: "19px",
+                  color: "darkcyan",
+                  fontWeight: "bold",
+                  textShadow: "1px 1px 1px white",
+                  cursor: "pointer",
+                }}
+              >
+                Edit
+              </span>
+            </label>
           </div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfileImageChange}
+            style={{ display: "none" }}
+            id="profile-image-input"
+          />
 
-          {/* Cover Photo Section */}
           <div style={{ marginBottom: "10px" }}>
             <input
               type="file"
@@ -252,27 +258,30 @@ function EditProfile() {
               style={{ display: "none" }}
               id="cover-image-input"
             />
-            <label htmlFor="cover-image-input">
-              <Button variant="contained" color="info" component="span" >
-                Change cover 
-              </Button>
-            </label>
-            <label htmlFor="profile-image-input">
-                <Button variant="contained" color="info" component="span">
-                  change Photo
-                </Button>
-              </label>
 
+            <label htmlFor="cover-image-input">
+              <p
+                style={{
+                  fontSize: "19px",
+                  color: "darkcyan",
+                  fontWeight: "bold",
+                  textShadow: "1px 1px 1px white",
+                  cursor: "pointer",
+                  textAlign:"right"
+                }}
+              >
+                Edit
+              </p>
+            </label>
             {coverPhoto ? (
               <div
                 style={{
                   marginTop: "10px",
                   height: "auto",
-                  overflow: "hidden",
                   borderRadius: "5px",
-                  boxSizing: "border-box",
                   padding: "2px",
-                  border: "2px inset rgba(0, 0, 0, 0.2)",
+                  border: "2px solid rgba(0, 0, 0, 0.32)",
+
                 }}
               >
                 <img
