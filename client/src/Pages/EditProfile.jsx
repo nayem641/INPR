@@ -71,7 +71,7 @@ function EditProfile() {
     const user_id = JSON.parse(localStorage.getItem("user_id"));
     try {
       const response = await axios.get(
-        `https://inpr-client.onrender.com/users/${user_id}`
+        `https://inpr.onrender.com/users/${user_id}`
       );
 
       setFirstName(response.data.user.firstName);
@@ -169,7 +169,7 @@ function EditProfile() {
       }
 
       const response = await axios.put(
-        `https://inpr-client.onrender.com/users/${user_id}`,
+        `https://inpr.onrender.com/users/${user_id}`,
         userObject
       );
       const authorId = response.data.user._id;
@@ -179,7 +179,7 @@ function EditProfile() {
           response.data.user.firstName + " " + response.data.user.lastName,
       };
       const updatedPost = await axios.put(
-        `https://inpr-client.onrender.com/posts/author/${authorId}`,
+        `https://inpr.onrender.com/posts/author/${authorId}`,
         post
       );
       setUpdating(false);
