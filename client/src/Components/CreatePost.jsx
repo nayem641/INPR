@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import "./Styles/CreatePost.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { FaRegEdit } from "react-icons/fa";
 
 function CreatePost() {
   const [author,setAuthor]=useState({})
