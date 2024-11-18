@@ -27,6 +27,7 @@ function Posts() {
       {loading && (
         <div>
           <HomeLoading />
+            <HomeLoading />
         </div>
       )}
       {!loading && posts.length === 0 && (
