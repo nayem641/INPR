@@ -16,7 +16,7 @@ function CreatePost() {
   return (
     <div className="createPostContainer">
       <img
-        src={author?.profilePic}
+        src="/user.png"
         alt="/user.png"
         onClick={() => {
           navigate("/profile");

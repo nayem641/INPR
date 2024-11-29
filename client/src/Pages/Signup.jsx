@@ -19,8 +19,6 @@ import { GrLinkNext } from "react-icons/gr";
 import styles from "./SignupStyles";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { storage } from "../firebase.config";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -34,46 +32,46 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [occupation, setOccupation] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
-  const [uploading, setUploading] = useState(false);
-  const [profilePic, setProfilePic] = useState("");
+  // const [uploading, setUploading] = useState(false);
+  // const [profilePic, setProfilePic] = useState("");
 
-  const uploadProfilePic = async (e) => {
-    var file = e.target.files[0];
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !dateOfBirth ||
-      !gender ||
-      !phoneNumber ||
-      !occupation ||
-      !bloodGroup
-    ) {
-      return toast.error("Please fill previous fields");
-    }
-    if (!file) {
-      toast.error("Please select a profile picture");
-      return;
-    }
-    setUploading(true);
-    try {
-      e.preventDefault();
-      console.log("uploading...");
-      const storageRef = ref(storage, `profilePics/${file.name}`); // Create a reference to the storage path
-      const snapshot = await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
-      setProfilePic(downloadURL);
+  // const uploadProfilePic = async (e) => {
+  //   var file = e.target.files[0];
+  //   if (
+  //     !firstName ||
+  //     !lastName ||
+  //     !email ||
+  //     !password ||
+  //     !dateOfBirth ||
+  //     !gender ||
+  //     !phoneNumber ||
+  //     !occupation ||
+  //     !bloodGroup
+  //   ) {
+  //     return toast.error("Please fill previous fields");
+  //   }
+  //   if (!file) {
+  //     toast.error("Please select a profile picture");
+  //     return;
+  //   }
+  //   setUploading(true);
+  //   try {
+  //     e.preventDefault();
+  //     console.log("uploading...");
+  //     const storageRef = ref(storage, `profilePics/${file.name}`); // Create a reference to the storage path
+  //     const snapshot = await uploadBytes(storageRef, file);
+  //     const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+  //     setProfilePic(downloadURL);
 
-      toast("profile uploaded");
-      console.log(downloadURL);
-      setUploading(false);
-    } catch (error) {
-      toast.error(error.message);
-      console.error(error);
-      setUploading(false);
-    }
-  };
+  //     toast("profile uploaded");
+  //     console.log(downloadURL);
+  //     setUploading(false);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //     console.error(error);
+  //     setUploading(false);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,25 +85,21 @@ const Signup = () => {
       phoneNumber,
       occupation,
       bloodGroup,
-      profilePic,
     };
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !dateOfBirth ||
-      !gender ||
-      !phoneNumber ||
-      !occupation ||
-      !bloodGroup
-    ) {
-      return toast.error("Please fill previous fields");
-    }
-    if (!profilePic) {
-      toast.error("Please upload a profile picture");
-      return;
-    } else {
+    // if (
+    //   !firstName ||
+    //   !lastName ||
+    //   !email ||
+    //   !password ||
+    //   !dateOfBirth ||
+    //   !gender ||
+    //   !phoneNumber ||
+    //   !occupation ||
+    //   !bloodGroup
+    // ) {
+    //   return toast.error("Please fill previous fields");
+    // }
+   
       fetch("https://inpr.onrender.com/auth/signup", {
         method: "POST",
         headers: {
@@ -118,16 +112,7 @@ const Signup = () => {
           if (data.success) {
             toast.success(data.message);
             console.log(data.createdUser);
-            // setFirstName("");
-            // setLastName("");
-            // setEmail("");
-            // setPassword("");
-            // setDateOfBirth(null);
-            // setGender("");
-            // setPhoneNumber("");
-            // setOccupation("");
-            // setBloodGroup("");
-            // setProfilePic("");
+         
             navigate("/login");
           } else {
             toast.error(data.message);
@@ -138,7 +123,7 @@ const Signup = () => {
           console.error(error.message);
           toast.error(error.message);
         });
-    }
+    
   };
 
   const nextStep = () => {
@@ -410,7 +395,7 @@ const Signup = () => {
                 }}
               >
                 <img
-                  src={uploading ? "/uploading.gif" : "/placeholder.webp"}
+                  src="placeholder.webp"
                   height={"120px"}
                 />
               </div>
@@ -418,7 +403,7 @@ const Signup = () => {
 
             <div style={styles.inputContainer}>
               <input
-                onChange={uploadProfilePic}
+                // onChange={uploadProfilePic}
                 placeholder="Choose Photo"
                 type="file"
                 name="profilePic"
@@ -437,10 +422,9 @@ const Signup = () => {
               <button
                 className="submitButton"
                 onClick={handleSubmit}
-                disabled={uploading}
                 style={{
                   ...styles.button,
-                  backgroundColor: uploading ? "rgba(0,0,0,.4)" : "blue",
+                  backgroundColor: "blue",
                 }}
               >
                 SUBMIT

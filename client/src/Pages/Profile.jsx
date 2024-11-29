@@ -118,7 +118,7 @@ function Profile() {
           </div>
           <div className="profilePic">
             <img
-              src={user.profilePic}
+              src="/user.png"
               alt=""
               style={{ border: "3px inherit gray" }}
             />

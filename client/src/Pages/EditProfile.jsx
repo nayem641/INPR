@@ -39,8 +39,8 @@ function EditProfile() {
   // const [coverImage, setCoverImage] = useState(null);
   // const [showProfileEdit, setShowProfileEdit] = useState(false);
   // const [showCoverEdit, setShowCoverEdit] = useState(false);
-  const [ppuploading, setppuploading] = useState(false);
-  const [cpuploading, setcpuploading] = useState(false);
+  // const [ppuploading, setppuploading] = useState(false);
+  // const [cpuploading, setcpuploading] = useState(false);
   ////-------------INPUT FIELDS states------------------//////////
 
   const [firstName, setFirstName] = useState("");
@@ -51,7 +51,7 @@ function EditProfile() {
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [gender, setGender] = useState("");
   const [occupation, setOccupation] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  // const [profilePic, setProfilePic] = useState("");
   const [coverPhoto, setCoverPhoto] = useState("");
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
@@ -82,7 +82,7 @@ function EditProfile() {
       setDateOfBirth(response.data.user.dateOfBirth);
       setGender(response.data.user.gender);
       setOccupation(response.data.user.occupation);
-      setProfilePic(response.data.user.profilePic);
+      // setProfilePic(response.data.user.profilePic);
       setCoverPhoto(response.data.user.coverPhoto);
       setSchool(response.data.user.school);
       setCollege(response.data.user.college);
@@ -98,48 +98,48 @@ function EditProfile() {
 
   ////////////////////////////
 
-  const handleProfileImageChange = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (file) {
-        setppuploading(true);
-        const storageRef = ref(storage, `profilePics/${file.name}`); // Create a reference to the storage path
-        const snapshot = await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
-        setProfilePic(downloadURL);
-        setppuploading(false);
+  // const handleProfileImageChange = async (e) => {
+  //   try {
+  //     const file = e.target.files[0];
+  //     if (file) {
+  //       setppuploading(true);
+  //       const storageRef = ref(storage, `profilePics/${file.name}`); // Create a reference to the storage path
+  //       const snapshot = await uploadBytes(storageRef, file);
+  //       const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+  //       setProfilePic(downloadURL);
+  //       setppuploading(false);
 
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-          await setProfileImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    } catch (error) {
-      toast.error("Failed!please try again later");
-    }
-  };
+  //       const reader = new FileReader();
+  //       reader.onloadend = async () => {
+  //         await setProfileImage(reader.result);
+  //       };
+  //       reader.readAsDataURL(file);
+  //     }
+  //   } catch (error) {
+  //     toast.error("Failed!please try again later");
+  //   }
+  // };
 
-  const handleCoverImageChange = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (file) {
-        setcpuploading(true);
-        const storageRef = ref(storage, `coverPhotos/${file.name}`); // Create a reference to the storage path
-        const snapshot = await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
-        setCoverPhoto(downloadURL);
-        setcpuploading(false);
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-          await setCoverImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    } catch (error) {
-      toast.error("failed! please try again later");
-    }
-  };
+  // const handleCoverImageChange = async (e) => {
+  //   try {
+  //     const file = e.target.files[0];
+  //     if (file) {
+  //       setcpuploading(true);
+  //       const storageRef = ref(storage, `coverPhotos/${file.name}`); // Create a reference to the storage path
+  //       const snapshot = await uploadBytes(storageRef, file);
+  //       const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+  //       setCoverPhoto(downloadURL);
+  //       setcpuploading(false);
+  //       const reader = new FileReader();
+  //       reader.onloadend = async () => {
+  //         await setCoverImage(reader.result);
+  //       };
+  //       reader.readAsDataURL(file);
+  //     }
+  //   } catch (error) {
+  //     toast.error("failed! please try again later");
+  //   }
+  // };
 
   const updateInfo = async (e) => {
     e.preventDefault();
@@ -152,8 +152,8 @@ function EditProfile() {
       dateOfBirth,
       gender,
       occupation,
-      profilePic,
-      coverPhoto,
+      // profilePic,
+      // coverPhoto,
       school,
       college,
       university,
@@ -217,7 +217,7 @@ function EditProfile() {
        
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Avatar
-              src={ppuploading ? "/ppp.gif" : profilePic}
+              src="/user.png"
               alt="Profile Picture"
               style={{
                 width: "110px",
@@ -245,7 +245,7 @@ function EditProfile() {
           <input
             type="file"
             accept="image/*"
-            onChange={handleProfileImageChange}
+            // onChange={handleProfileImageChange}
             style={{ display: "none" }}
             id="profile-image-input"
           />
@@ -254,7 +254,7 @@ function EditProfile() {
             <input
               type="file"
               accept="image/*"
-              onChange={handleCoverImageChange}
+              // onChange={handleCoverImageChange}
               style={{ display: "none" }}
               id="cover-image-input"
             />
@@ -285,7 +285,7 @@ function EditProfile() {
                 }}
               >
                 <img
-                  src={cpuploading ? "/photoupdating.gif" : coverPhoto}
+                  src={ coverPhoto}
                   alt="Cover"
                   style={{
                     width: "100%",
