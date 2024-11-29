@@ -320,7 +320,7 @@ function CreatePostPage() {
                 fontSize: "20px",
                 padding: "8px 0px",
                 border: "none",
-                backgroundColor: !image && !text && !video ? "gray" : "#007bff",
+                backgroundColor: !image && !text ? "gray" : "#007bff",
                 color: "white",
                 cursor: "pointer",
                 fontWeight: "bold",
