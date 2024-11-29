@@ -64,7 +64,7 @@ function CreatePostPage() {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (!text && !image &&!video ) {
+      if (!text ) {
         toast.error("You didn't create a post");
         return;
       }
@@ -73,7 +73,7 @@ function CreatePostPage() {
       const author = await axios.get(`https://inpr.onrender.com/users/${authorId}`);
       const authorName = author.data.user.firstName+" "+author.data.user.lastName;
       const authorPp = author.data.user.profilePic;
-      const postObject = { text, image,video, authorId, authorName, authorPp };
+      const postObject = { text, authorId, authorName, authorPp };
       const response = await axios.post(
         "https://inpr.onrender.com/posts/",
         postObject
@@ -106,7 +106,7 @@ function CreatePostPage() {
               onClick={handlePostSubmit}
               style={{
                 color:
-                  posting || (!image && !text )
+                  posting ||!text 
                     ? "gray"
                     : "#007bff",
               }}
@@ -320,7 +320,7 @@ function CreatePostPage() {
                 fontSize: "20px",
                 padding: "8px 0px",
                 border: "none",
-                backgroundColor: !image && !text ? "gray" : "#007bff",
+                backgroundColor:  !text ? "gray" : "#007bff",
                 color: "white",
                 cursor: "pointer",
                 fontWeight: "bold",
