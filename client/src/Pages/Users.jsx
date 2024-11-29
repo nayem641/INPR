@@ -82,7 +82,7 @@ function Users() {
               style={{ boxShadow: "none" }}
             >
               <div>
-                <img src={user.profilePic} alt="" />
+                <img src="/user.png" alt="" />
               </div>
               <div className="request-info">
                 <div className="request-header">

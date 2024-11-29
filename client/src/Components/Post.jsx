@@ -30,7 +30,7 @@ function Post({ post }) {
       <div className="post-container">
         <div className="postContainer-Uppersection">
           <div className="post-owner">
-            <img src={post.authorPp} alt="" />
+            <img src="/user.png" alt="" />
             <div>
               <span>
                 <a href="">{post.authorName}</a>
