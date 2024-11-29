@@ -106,7 +106,7 @@ function CreatePostPage() {
               onClick={handlePostSubmit}
               style={{
                 color:
-                  posting || (!image && !text && !video)
+                  posting || (!image && !text )
                     ? "gray"
                     : "#007bff",
               }}
