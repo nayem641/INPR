@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Styles/Signup.css";
+import { useNavigate } from "react-router";
+import { RiImageAddFill } from "react-icons/ri";
+import "./Styles//Signup.css";
 import {
   FaUser,
   FaEnvelope,
@@ -14,11 +15,139 @@ import {
 } from "react-icons/fa";
 import { GrLinkPrevious } from "react-icons/gr";
 import { GrLinkNext } from "react-icons/gr";
+
 import styles from "./SignupStyles";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { storage } from "../firebase.config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(null);
+  const [gender, setGender] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [profilePic, setProfilePic] = useState("");
 
+  const uploadProfilePic = async (e) => {
+    var file = e.target.files[0];
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !dateOfBirth ||
+      !gender ||
+      !phoneNumber ||
+      !occupation ||
+      !bloodGroup
+    ) {
+      return toast.error("Please fill previous fields");
+    }
+    if (!file) {
+      toast.error("Please select a profile picture");
+      return;
+    }
+    setUploading(true);
+    try {
+      e.preventDefault();
+      console.log("uploading...");
+      const storageRef = ref(storage, `profilePics/${file.name}`); // Create a reference to the storage path
+      const snapshot = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+      setProfilePic(downloadURL);
+
+      toast("profile uploaded");
+      console.log(downloadURL);
+      setUploading(false);
+    } catch (error) {
+      toast.error(error.message);
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userObject = {
+      firstName,
+      lastName,
+      email,
+      password,
+      dateOfBirth,
+      gender,
+      phoneNumber,
+      occupation,
+      bloodGroup,
+      profilePic,
+    };
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !dateOfBirth ||
+      !gender ||
+      !phoneNumber ||
+      !occupation ||
+      !bloodGroup
+    ) {
+      return toast.error("Please fill previous fields");
+    }
+    if (!profilePic) {
+      toast.error("Please upload a profile picture");
+      return;
+    } else {
+      fetch("https://inpr.onrender.com/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userObject),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            toast.success(data.message);
+            console.log(data.createdUser);
+            // setFirstName("");
+            // setLastName("");
+            // setEmail("");
+            // setPassword("");
+            // setDateOfBirth(null);
+            // setGender("");
+            // setPhoneNumber("");
+            // setOccupation("");
+            // setBloodGroup("");
+            // setProfilePic("");
+            navigate("/login");
+          } else {
+            toast.error(data.message);
+            console.log(data.message);
+          }
+        })
+        .catch((error) => {
+          console.error(error.message);
+          toast.error(error.message);
+        });
+    }
+  };
+
+  const nextStep = () => {
+    setStep(step + 1);
+  };
+  const prevStep = () => {
+    setStep(step - 1);
+  };
+  // ----------------VIEW------------------------------------
   const renderStep = () => {
     switch (step) {
       case 0:
@@ -42,7 +171,7 @@ const Signup = () => {
                 style={{ ...styles.image, width: "300px", height: "auto" }}
               />
               <button
-                onClick={() => setStep(step + 1)}
+                onClick={nextStep}
                 style={{
                   width: "100%",
                   padding: "10px 12px",
@@ -52,8 +181,17 @@ const Signup = () => {
                   borderRadius: "8px",
                   cursor: "pointer",
                   fontSize: "22px",
+                  // fontWeight: "bold",
                   transition: "background 0.3s ease, color 0.3s ease",
                   marginBottom: "20px",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "blue";
+                  e.target.style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = "#007bff";
+                  e.target.style.color = "white";
                 }}
               >
                 Let's Start
@@ -66,6 +204,7 @@ const Signup = () => {
                     color: "#007bff",
                     fontSize: "20px",
                     marginLeft: "10px",
+                    // fontWeight: "bold",
                   }}
                 >
                   Login
@@ -86,6 +225,11 @@ const Signup = () => {
                 <FaUser style={styles.icon} />
                 <input
                   type="text"
+                  name="firstName"
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
+                  value={firstName}
                   placeholder="First Name"
                   style={styles.input}
                 />
@@ -94,6 +238,11 @@ const Signup = () => {
                 <FaUser style={styles.icon} />
                 <input
                   type="text"
+                  name="lastName"
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
+                  value={lastName}
                   placeholder="Last Name"
                   style={styles.input}
                 />
@@ -102,14 +251,19 @@ const Signup = () => {
                 <FaBriefcase style={styles.icon} />
                 <input
                   type="text"
+                  name="occupation"
+                  onChange={(e) => {
+                    setOccupation(e.target.value);
+                  }}
+                  value={occupation}
                   placeholder="Occupation"
                   style={styles.input}
                 />
               </div>
 
               <div className="step-btn-conatiner">
-                <span onClick={() => setStep(step - 1)}>Back</span>
-                <span onClick={() => setStep(step + 1)}>Next</span>
+                <span onClick={prevStep}>Back</span>
+                <span onClick={nextStep}>Next</span>
               </div>
             </div>
           </>
@@ -124,12 +278,26 @@ const Signup = () => {
               </div>
               <div style={styles.inputContainer}>
                 <FaEnvelope style={styles.icon} />
-                <input type="email" placeholder="Email" style={styles.input} />
+                <input
+                  type="email"
+                  name="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  value={email}
+                  placeholder="Email"
+                  style={styles.input}
+                />
               </div>
               <div style={styles.inputContainer}>
                 <FaPhone style={styles.icon} />
                 <input
                   type="tel"
+                  name="phoneNumber"
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }}
+                  value={phoneNumber}
                   placeholder="Phone Number"
                   style={styles.input}
                 />
@@ -138,13 +306,18 @@ const Signup = () => {
                 <FaLock style={styles.icon} />
                 <input
                   type="password"
+                  name="password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  value={password}
                   placeholder="Password"
                   style={styles.input}
                 />
               </div>
               <div className="step-btn-conatiner">
-                <span onClick={() => setStep(step - 1)}>Back</span>
-                <span onClick={() => setStep(step + 1)}>Next</span>
+                <span onClick={prevStep}>Back</span>
+                <span onClick={nextStep}>Next</span>
               </div>
             </div>
           </>
@@ -162,6 +335,11 @@ const Signup = () => {
                 <FaBirthdayCake style={styles.icon} />
                 <input
                   type="date"
+                  name="dateOfBirth"
+                  onChange={(e) => {
+                    setDateOfBirth(e.target.value);
+                  }}
+                  value={dateOfBirth}
                   placeholder="Date of Birth"
                   style={styles.input}
                 />
@@ -169,8 +347,15 @@ const Signup = () => {
 
               <div style={styles.inputContainer}>
                 <FaTint style={styles.icon} />
-                <select style={styles.input}>
-                  <option value="">Blood Group</option>
+                <select
+                  name="bloodGroup"
+                  onChange={(e) => {
+                    setBloodGroup(e.target.value);
+                  }}
+                  value={bloodGroup}
+                  style={styles.input}
+                >
+                  <option value=""> Blood Group</option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
@@ -184,7 +369,14 @@ const Signup = () => {
 
               <div style={styles.inputContainer}>
                 <FaVenusMars style={styles.icon} />
-                <select style={styles.input}>
+                <select
+                  name="gender"
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                  }}
+                  value={gender}
+                  style={styles.input}
+                >
                   <option value="">Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -192,8 +384,8 @@ const Signup = () => {
                 </select>
               </div>
               <div className="step-btn-conatiner">
-                <span onClick={() => setStep(step - 1)}>Back</span>
-                <span onClick={() => setStep(step + 1)}>Next</span>
+                <span onClick={prevStep}>Back</span>
+                <span onClick={nextStep}>Next</span>
               </div>
             </div>
           </>
@@ -218,15 +410,15 @@ const Signup = () => {
                 }}
               >
                 <img
-                  src="/placeholder.webp"
+                  src={uploading ? "/uploading.gif" : "/placeholder.webp"}
                   height={"120px"}
-                  alt="Profile Placeholder"
                 />
               </div>
             </label>
 
             <div style={styles.inputContainer}>
               <input
+                onChange={uploadProfilePic}
                 placeholder="Choose Photo"
                 type="file"
                 name="profilePic"
@@ -236,13 +428,21 @@ const Signup = () => {
             </div>
 
             <div className="step-btn-conatiner">
-              <span
-                onClick={() => setStep(step - 1)}
-                style={{ marginLeft: "0px" }}
-              >
+              {/* <span >
+                <GrLinkPrevious className="step-btn" onClick={prevStep} />
+              </span> */}
+              <span onClick={prevStep} style={{ marginLeft: "0px" }}>
                 Back
               </span>
-              <button className="submitButton" style={styles.button}>
+              <button
+                className="submitButton"
+                onClick={handleSubmit}
+                disabled={uploading}
+                style={{
+                  ...styles.button,
+                  backgroundColor: uploading ? "rgba(0,0,0,.4)" : "blue",
+                }}
+              >
                 SUBMIT
               </button>
             </div>
@@ -254,7 +454,7 @@ const Signup = () => {
   };
 
   return (
-    <div  
+    <div
       style={{
         backgroundColor: "#f0f2f5",
         minHeight: "100vh",
