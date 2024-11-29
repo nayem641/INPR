@@ -441,7 +441,7 @@ const Signup = () => {
   };
 
   return (
-    <div
+    <div  
       style={{
         backgroundColor: "#f0f2f5",
         minHeight: "100vh",
