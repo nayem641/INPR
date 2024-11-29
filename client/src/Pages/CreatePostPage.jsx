@@ -15,51 +15,51 @@ function CreatePostPage() {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
   const [posting, setPosting] = useState(false);
-  const [video,setVideo] = useState("");
+  // const [video,setVideo] = useState("");
 
-  const handleImageUpload = async (e) => {
-    e.preventDefault();
-    try {
-      setPosting(false);
-      setImage(null);
-      const file = e.target.files[0];
-      if (file) {
-        setUploading(true);
-        const storageRef = ref(storage, `postPhotos/${file.name}`); // Create a reference to the storage path
-        const snapshot = await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
-        !downloadURL && toast.error("failed");
-        downloadURL && setImage(downloadURL);
-        setUploading(false);
-      }
-    } catch (error) {
-      toast.error("failed! Something went wrong");
-      setUploading(false);
-    }
-  };
-  const handleVideoUpload = async (e) => {
-    e.preventDefault();
+  // const handleImageUpload = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     setPosting(false);
+  //     setImage(null);
+  //     const file = e.target.files[0];
+  //     if (file) {
+  //       setUploading(true);
+  //       const storageRef = ref(storage, `postPhotos/${file.name}`); // Create a reference to the storage path
+  //       const snapshot = await uploadBytes(storageRef, file);
+  //       const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+  //       !downloadURL && toast.error("failed");
+  //       downloadURL && setImage(downloadURL);
+  //       setUploading(false);
+  //     }
+  //   } catch (error) {
+  //     toast.error("failed! Something went wrong");
+  //     setUploading(false);
+  //   }
+  // };
+  // const handleVideoUpload = async (e) => {
+  //   e.preventDefault();
     
-    try {
-      setPosting(false);
-      setImage(null);
-      const file = e.target.files[0];
-      if (file) {
-        setUploading(true);
-        const storageRef = ref(storage, `postVideos/${file.name}`); // Create a reference to the storage path
-        const snapshot = await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
-        !downloadURL && toast.error("failed");
-        downloadURL && setVideo(downloadURL);
-        setUploading(false);
-      }
-    } catch (error) {
-      toast.error("failed! Something went wrong");
-      setUploading(false);
-    }
-  };
+  //   try {
+  //     setPosting(false);
+  //     setImage(null);
+  //     const file = e.target.files[0];
+  //     if (file) {
+  //       setUploading(true);
+  //       const storageRef = ref(storage, `postVideos/${file.name}`); // Create a reference to the storage path
+  //       const snapshot = await uploadBytes(storageRef, file);
+  //       const downloadURL = await getDownloadURL(snapshot.ref); // Get the file's download URL after upload
+  //       !downloadURL && toast.error("failed");
+  //       downloadURL && setVideo(downloadURL);
+  //       setUploading(false);
+  //     }
+  //   } catch (error) {
+  //     toast.error("failed! Something went wrong");
+  //     setUploading(false);
+  //   }
+  // };
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
@@ -79,9 +79,9 @@ function CreatePostPage() {
         postObject
       );
       setPosting(false);
-      console.log(response);
-      setText("");
-      setImage("");
+      // console.log(response);
+      // setText("");
+      // setImage("");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -106,7 +106,7 @@ function CreatePostPage() {
               onClick={handlePostSubmit}
               style={{
                 color:
-                  uploading || posting || (!image && !text && !video)
+                  posting || (!image && !text && !video)
                     ? "gray"
                     : "#007bff",
               }}
@@ -173,7 +173,7 @@ function CreatePostPage() {
           </>
 
           <div className="attachment-inputs">
-            {uploading && (
+            {/* {uploading && (
               <div
                 style={{
                   display: "flex",
@@ -252,17 +252,17 @@ function CreatePostPage() {
                 />
                 <hr style={{ border: "1px dotted gray" }} />
               </div>
-            )}
+            )} */}
             <>
               <input
                 type="file"
-                onChange={handleImageUpload}
+                // onChange={handleImageUpload}
                 id="post-image-input"
                 style={{ display: "none" }}
               />
               <input
                 type="file"
-                onChange={handleVideoUpload}
+                // onChange={handleVideoUpload}
                 id="post-video-input"
                 style={{ display: "none" }}
               />
@@ -311,7 +311,6 @@ function CreatePostPage() {
             </>
 
             <button
-              disabled={uploading}
               onClick={handlePostSubmit}
               style={{
                 margin: "10px auto",
